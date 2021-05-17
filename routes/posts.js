@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
         countRooms: req.body.countRooms,
         longDescription: req.body.longDescription,
         price: req.body.price,
-        address: req.bode.address,
+        address: req.body.address,
         description: req.body.description
     });
     try{
