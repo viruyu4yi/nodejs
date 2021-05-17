@@ -14,7 +14,13 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const post = new Post({
-        title: req.body.title,
+        img: req.body.img,
+        typeSell: req.body.typeSell,
+        typeBuild: req.body.typeBuild,
+        countRooms: req.body.countRooms,
+        longDescription: req.body.longDescription,
+        price: req.body.price,
+        address: req.bode.address,
         description: req.body.description
     });
     try{
@@ -50,7 +56,7 @@ router.patch('/:postId', async (req, res) => {
     try{
         const updatedPost = await Post.updateOne(
             { _id: req.params.postId },
-            { $set: { title: req.body.title } } 
+            { $set: {} } 
         );
         res.json(updatedPost);
     }catch (err) {

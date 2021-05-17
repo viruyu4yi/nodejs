@@ -1,17 +1,36 @@
 const mongoose = require('mongoose');
 
 const PostSchema = mongoose.Schema({
-    title: {
+    img: {
         type: String,
         require: true
+    },
+    typeSell: {
+        type: String,
+        require: true
+    },
+    typeBuild: {
+        type: String,
+        require: true
+    },
+    countRooms: {
+        type: String
     },
     description: {
         type: String,
         require: true
     },
-    date: {
-        type: Date,
-        default: Date.now
+    longDescription: {
+        type: String,
+        require: true
+    },
+    price: {
+        type: String,
+        require: true
+    },
+    address: {
+        type: String,
+        require: true
     }
 });
 
