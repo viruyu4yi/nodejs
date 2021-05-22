@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
+const authMiddleware = require('../middlewaree/authMiddleware');
+const roleMiddleware = require('../middlewaree/roleMiddleware');
 
 router.get('/', async (req, res) => {
     try{
@@ -12,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 
-router.post('/', async (req, res) => {
+router.post('/', roleMiddleware(["ADMIN"]), async (req, res) => {
     const post = new Post({
         img: req.body.img,
         typeSell: req.body.typeSell,
@@ -32,42 +34,10 @@ router.post('/', async (req, res) => {
 });
 
 
-router.get('/:postId', async (req, res) => {
-    try{
-        const post = await Post.findById(req.params.postId);
-        res.json(post);
-    }catch (err) {
-        res.json({ message: err });
-    }
-});
-
-
-router.delete('/:postId', async (req, res) => {
+router.delete('/:postId', roleMiddleware(["ADMIN"]), async (req, res) => {
     try{
         const removedPost = await Post.remove({ _id: req.params.postId });
         res.json(removedPost);
-    }catch (err) {
-        res.json({ message: err });
-    }
-});
-
-
-router.patch('/:postId', async (req, res) => {
-    try{
-        const updatedPost = await Post.updateOne(
-            { _id: req.params.postId },
-            { $set: {
-                img: req.body.img,
-                typeSell: req.body.typeSell,
-                typeBuild: req.body.typeBuild,
-                countRooms: req.body.countRooms,
-                longDescription: req.body.longDescription,
-                price: req.body.price,
-                address: req.body.address,
-                description: req.body.description
-            } } 
-        );
-        res.json(updatedPost);
     }catch (err) {
         res.json({ message: err });
     }

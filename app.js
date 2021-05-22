@@ -10,7 +10,9 @@ app.use(bodyParser.json());
 
 //Import Routes
 const postsRoute = require('./routes/posts');
+const authRouter = require('./routes/authRouter');
 
+app.use("/auth", authRouter);
 app.use('/posts', postsRoute);
 
 //ROUTES
