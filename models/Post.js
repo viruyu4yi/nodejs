@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PostSchema = mongoose.Schema({
     img: {
-        type: String,
+        type: Array,
         require: true
     },
     typeSell: {
